@@ -2,6 +2,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const fetch = require("node-fetch");
 
 // Fetch authentithication stuff
 const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/cookies.json')));
@@ -129,5 +130,9 @@ module.exports = {
         // Send content and end request
         req.write(content);
         req.end();
+    },
+    async function getPost(topicID, postNum) {
+        const response = await fetch('view-source:https://scratch.mit.edu/discuss/topic/' + topicID + '/?page=' + Math.floor(postNum/10);
+        const messages = response.split('<div id="p')[postNum%10]
     }
 }
